@@ -1,0 +1,23 @@
+package main
+import "fmt"
+type person struct {    
+    name string
+    age  int
+}
+
+ func main () {
+   m := make(map[string]int)
+
+   m["k1"] = 7
+   m["k2"] = 13
+   m["3"] = 13
+
+  pt := &m
+ fmt.Println(pt) 
+ st := person{name: namet, age: 50}
+  spt := &st
+  
+ fmt.Println(spt)
+
+
+}
