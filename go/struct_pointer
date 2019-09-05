@@ -1,0 +1,23 @@
+package main
+
+import "fmt"
+
+type person struct {
+    name string
+    age  int
+}
+
+func NewPerson(namet string) *person {   //  func  NewPerson returning pointer to a struct
+
+    p := person{name: namet, age: 50} 
+    p.age = 42
+    return &p
+}
+
+func main() {
+
+pt = NewPerson("Jon")         //pt has pointer to struct person
+ fmt.Println(pt.age)
+ fmt.Println(pt)    // will print the struct instance, in pointer notation
+
+}
