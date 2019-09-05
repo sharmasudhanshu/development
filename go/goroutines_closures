@@ -1,0 +1,30 @@
+package main
+import "fmt"
+import "time"
+
+func main() {
+   for i := 0; i < 10; i++ {
+
+  go func (){            //by the time all 10 Println execs (in seperate threads) , for loop finishes & i get val as 10 , so prints 10 for in Println 
+    fmt.Println( "printing values:", i)   // goroutines within for loop prints the latest updated value for all loops
+    }()
+
+  }
+time.Sleep(2 * time.Second)
+}
+
+#################################################
+package main
+import "fmt"
+import "time"
+
+func main() {
+   for i := 0; i < 10; i++ {
+
+  go func (n int){              // n int will hold the loop iteration value of the var i , as per current iteration
+    fmt.Println( "printing values:", n)
+    }(i)                          // i as closure to inform that n int must attain exact looping value of i  
+
+  }
+time.Sleep(2 * time.Second)
+}
