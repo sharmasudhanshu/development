@@ -1,0 +1,30 @@
+package main
+import (
+    "fmt"
+    "time"
+)
+type rect struct {
+    key  chan int
+    resp chan int
+}
+func (re rect) area()  {
+   time.Sleep(4* time.Second)  // wait for main func to assign values in channels
+   val1 := <-re.key
+   val2 := <-re.resp
+   val3 := val1 * val2
+   fmt.Println(val1,val2,val3,"printing values of val1,val2 & val3 ")
+}
+func main() {
+  num1 := make(chan int)
+  num2 := make(chan int)
+  c1 := rect {num1,num2}  // initialize the struct now ,otherwise it will fail in goroutine
+  fmt.Println("hi golang",c1)
+  go c1.area ()
+
+
+c1.key <- 40
+c1.resp <- 20
+time.Sleep(time.Second)
+fmt.Println("hi golang",c1)
+
+}
