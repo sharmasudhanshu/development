@@ -1,0 +1,50 @@
+
+
+############################################################################################################################
+
+
+
+in master  ip 196.168.20.3  run master & a volume  server   &  mkdir  /tmp/1
+
+./weed master -ip.bind 196.168.20.3 -ip 196.168.20.3
+./weed volume -port=8081 -dir=/tmp/1 -max=100 -mserver=196.168.20.3:9333 -ip.bind 196.168.20.3 -ip 196.168.20.3   
+
+in filer  server  ip 196.168.20.5  run a filer  command & a mount command
+./weed filer -master 196.168.20.3:9333 -ip 196.168.20.5                            ####run a filer 
+./weed mount filer=196.168.20.5:8888 -dir=/tmp/mntnew -filer.path=/path/to/myfiler/   ####mount a 
+
+ df -h  #### output of df -h on filer server 196.168.20.5 
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /dev
+tmpfs           396M  5.6M  390M   2% /run
+/dev/vda1       9.8G  4.1G  5.2G  44% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
+tmpfs           396M     0  396M   0% /run/user/1001
+SeaweedFS       206G  1.5K  206G   1% /root              #####in df -h output, you will see a new mount 
+
+
+ curl -F file=@/root/newtest http://196.168.20.5:8888/path/to/myfiler/myfile   ####note : append the filename to filer path like /path/to/myfiler/myfile  
+{"name":"newtest","size":32,"fid":"2,09f7630f4d","url":"http://196.168.20.3:8081/2,09f7630f4d"}
+
+ curl http://196.168.20.5:8888/path/to/myfiler/myfile
+hi i am in new test file  19:53
+
+you can check the same in browser  , http://196.168.20.5:8888/path/to/myfiler/myfile
+create another file newtestb  & check,
+
+ curl -F file=@/root/newtestb http://196.168.20.5:8888/path/to/myfiler/myfileb
+{"name":"newtestb","size":33,"fid":"5,0dfd2ad19a","url":"http://196.168.20.3:8081/5,0dfd2ad19a"}
+
+curl http://196.168.20.5:8888/path/to/myfiler/myfileb
+hi i am in new test b file 19:57
+
+curl http://196.168.20.5:8888/path/to/myfiler/myfilec
+hi i am in newtestc file  19:58
+
+###############################################################################
+
+
+
+
