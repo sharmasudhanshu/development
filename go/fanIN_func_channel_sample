@@ -2,12 +2,53 @@ package main
 import "fmt"
 import "time"
 import  "math/rand"
+//boring func's output like "joe 0" & "Ann 0" comes with rand delay , so which ever Joe or Ann comes first while going
+//through a forloop of 0 to 4 is received by the fanIN func , for loop total of 10 times sa in main func
+func fanIn(input1, input2 <-chan string) <-chan string {   //fanIN uses channel c from main & boring func to create 2 goroutines with 2 forloops
+  c := make(chan string)  // here we are creating 2 seperate forloops with goroutine calls specially for Joe & Ann,so whichever receives output ,gives it to main func without locking other  go func() { for { c <- <-input1 } }() // this goroutine gets boring's Sprintf Joe output & send to channel c to main ,but with random delay
+  go func() { for { c <- <-input2 } }() // this goroutine gets boring's Sprintf Ann output & send to channel c to main ,but with random delay  
+  return c
+}
 
-func fanIn(input1, input2 <-chan string) <-chan string {
+func boring(msg string) <-chan string { // Returns receive-only channel of strings.
     c := make(chan string)
-    go func() { for { c <- <-input1 } }()
-    go func() { for { c <- <-input2 } }()
-    return c
+    go func() { // We launch the goroutine from inside the function.
+        for i := 0; ; i++ {       // Joe & Ann calls will run total of 10 times, with each 0 to 4 means 5 times 
+            c <- fmt.Sprintf("%s %d", msg, i)
+            time.Sleep(time.Duration(rand.Intn(1e3)) * time.Millisecond)
+        }
+    }()
+    return c // Return the channel to the caller,func fanIn(boring()) in main func
+}
+
+func main() {
+    c := fanIn(boring("Joe"), boring("Ann")) //boring func call returns a channel c to communicate with the boring's goroutine,same channel 
+    for i := 0; i < 10; i++ {
+        fmt.Println(<-c) // recevies channel output from fanIN func ,2 seperate goroutines in fanIN withput locking eachother
+    }
+    fmt.Println("You're both boring; I'm leaving.")
+}
+
+
+
+#######################################################################################
+A simple function 
+
+package main
+import "fmt"
+import "time"
+import  "math/rand"
+
+func main() {
+    joe := boring("Joe")
+    ann := boring("Ann")
+    for i := 0; i < 5; i++ {
+    fmt.Println(<-joe) // Joe locks Ann from receiving & wont proceed forward,until Joe get channel's value irrespective of rand delay
+    fmt.Println(<-ann) //Ann gets locked as this statement wont print anything unless above joe's Println executes , so this maintains
+                        // the order of printing first Joe & then Ann, to break this wait & order of print we can use fanIN func 
+    }                    // as shown in above example .
+
+     fmt.Println("You're both boring; I'm leaving.")
 }
 
 func boring(msg string) <-chan string { // Returns receive-only channel of strings.
@@ -19,12 +60,4 @@ func boring(msg string) <-chan string { // Returns receive-only channel of strin
         }
     }()
     return c // Return the channel to the caller.
-}
-
-func main() {
-    c := fanIn(boring("Joe"), boring("Ann"))
-    for i := 0; i < 10; i++ {
-        fmt.Println(<-c)
-    }
-    fmt.Println("You're both boring; I'm leaving.")
 }
