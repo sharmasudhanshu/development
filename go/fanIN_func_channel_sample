@@ -9,8 +9,8 @@ func fanIn(input1, input2 <-chan string) <-chan string {   //fanIN uses channel 
                           //so whichever receives output ,gives it to main func without locking other 
   
   
-  go func() { for { c <- <-input1 } }() // this goroutine gets boring's Sprintf Joe output & send to channel c to main ,but with random delay
-  go func() { for { c <- <-input2 } }() // this goroutine gets boring's Sprintf Ann output & send to channel c to main ,but with random delay  
+  go func() { for { c <- <-input1 } }() // this goroutine gets boring's Sprintf Joe output & send to channel c to main ,but not locking Ann
+  go func() { for { c <- <-input2 } }() // this goroutine gets boring's Sprintf Ann output & send to channel c to main ,but not locking Joe
   return c
 }
 
