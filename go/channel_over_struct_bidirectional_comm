@@ -1,0 +1,33 @@
+//channel_over_struct_bidirectional
+//we share a channel in b/w goroutines & within that channel we pass a go structure , now this struct contains a string and a channel ,
+//using struct channel  you pass on a value from main func back to the goroutines .
+
+package main
+
+import "fmt"
+import "time"
+//import  "math/rand"
+
+type name struct {
+    name string
+    wait chan bool  //  channel to pass value from main func to goroutine func
+}
+
+func main() {
+    c := make(chan name)
+    waitForIt := make(chan bool) // Shared between all messages.
+    go func() {
+        c <- name{"sfsaf", waitForIt} // passing the struct over a channel c to the main func
+        time.Sleep(4 * time.Second) 
+        <-waitForIt  // waiting for the main func to put some value on the channel  
+        close(c)
+    fmt.Println("goroutine channel was closed (all done!).")
+    }()
+
+        time.Sleep(4 * time.Second)    
+        msg1 := <-c;fmt.Println(msg1.name)  // receiving values from the goroutine ,in main func
+        msg1.wait<- true    //puttin value in struct boolean channel & send it back to the waitForIt channel in goroutine 
+
+
+    fmt.Println("channel was closed (all done!).")
+}
