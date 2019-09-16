@@ -4,6 +4,7 @@ import "time"
 import  "math/rand"
 //boring func's output like "joe 0" & "Ann 0" comes with rand delay , so which ever Joe or Ann comes first while going
 //through a forloop of 0 to 4 is received by the fanIN func , for loop total of 10 times sa in main func
+//multiplex using fanIN func , all channels are received in fanIn func & whoever comes first is received by main
 func fanIn(input1, input2 <-chan string) <-chan string {   //fanIN uses channel c from main & boring func to create 2 goroutines with 2 forloops
   c := make(chan string)  // here we are creating 2 seperate forloops with goroutine calls specially for Joe & Ann
                           //so whichever receives output ,gives it to main func without locking other 
