@@ -1,3 +1,4 @@
+//pointer help us updating the data without creating another copy, example linklist,Trees etc.
 package main
 import "fmt"
 type person struct {    
@@ -20,4 +21,30 @@ type person struct {
  fmt.Println(spt)
 
 
+}
+
+################################################################################################
+
+package main
+
+import "fmt"
+
+type Person struct {
+    firstName string
+    lastName  string
+}
+
+func changeName(p *Person) {
+    p.firstName = "Bob"
+}
+
+func main() {
+    person := Person {
+        firstName: "Alice",  // firstName assigned value Alice,for struct instance person
+        lastName: "Dow",
+    }
+
+    changeName(&person) //struct instance person's firstname value is updated to Bob ,using func & pointer calls
+
+    fmt.Println(person)
 }
