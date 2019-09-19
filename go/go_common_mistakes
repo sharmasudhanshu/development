@@ -1,0 +1,115 @@
+package main  //  a simple forloop with goroutine prints 4 for each iteration
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+   
+for i := 0; i <5; i++ {
+go func() { 
+fmt.Println("i: ",i)
+}()        
+      
+}
+
+ time.Sleep(2 * time.Second) 
+}
+
+
+##########################################################################
+
+package main  // An updated forloop prints 0 ,1,2,3,4 for iterations
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+   
+for i := 0; i <5; i++ {
+go func(i int) {      //put i in anonymus functions input var
+fmt.Println("i: ",i)
+}(i)                //  put i while closing anonymus func
+      
+}
+
+ time.Sleep(2 * time.Second) 
+}
+
+
+
+
+################################################################################################
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	slice := []string{"a", "b", "c", "d", "e"}
+sliceLength := len(slice)
+fmt.Println("Running for loop…")
+for i := 0; i < sliceLength; i++ {
+    val := slice[i]
+    go func(i int) {
+    fmt.Printf("i: %v, val: %v\n", i, val)
+     }(i)
+}
+time.Sleep(2 * time.Second)
+fmt.Println("Finished for loop")
+}
+
+##########################################################################
+
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func main() {
+	slice := []string{"a", "b", "c", "d", "e"}
+sliceLength := len(slice)
+var wg sync.WaitGroup
+// Tell the 'wg' WaitGroup how many threads/goroutines
+//   that are about to run concurrently.
+wg.Add(sliceLength)
+fmt.Println("Running for loop…")
+for i := 0; i < sliceLength; i++ {
+    // Spawn a thread for each iteration in the loop.
+    // Pass 'i' into the goroutine's function
+    //   in order to make sure each goroutine
+    //   uses a different value for 'i'.
+    go func(i int) {
+        // At the end of the goroutine, tell the WaitGroup
+        //   that another thread has completed.
+        defer wg.Done()
+        val := slice[i]
+        fmt.Printf("i: %v, val: %v\n", i, val)
+    }(i)
+}
+// Wait for `wg.Done()` to be exectued the number of times
+//   specified in the `wg.Add()` call.
+// `wg.Done()` should be called the exact number of times
+//   that was specified in `wg.Add()`.
+// If the numbers do not match, `wg.Wait()` will either
+//   hang infinitely or throw a panic error.
+fmt.Println("Doing other stuff")
+wg.Wait()
+fmt.Println("Finished for loop")
+
+
+}
+
+
+################################################################
+
