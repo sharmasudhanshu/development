@@ -1,0 +1,58 @@
+ cat restapi.go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+func main() {
+    APIURL := "http://127.0.0.1:5000/companies"
+    req, err := http.NewRequest(http.MethodGet, APIURL, nil)
+    if err != nil {
+        panic(err)
+    }
+
+
+client := http.DefaultClient
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+
+defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        panic(err)
+    }
+fmt.Printf("%v", string(body))
+}
+root@mysqls:~/gorest# cat restapipost.go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
+func main() {
+    APIURL := "http://127.0.0.1:5000/companies"
+    req, err := http.NewRequest(http.MethodPost, APIURL, nil)
+    if err != nil {
+        panic(err)
+    }
+
+
+client := http.DefaultClient
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+
+defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        panic(err)
+    }
+fmt.Printf("%v", string(body))
+}
