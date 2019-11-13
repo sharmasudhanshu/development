@@ -1,0 +1,73 @@
+https://stoplight.io/mocking/
+A simple  APi server in python,Save the code as flaskapi.py and then run it from the command line: python flaskapi.py
+
+pip install flask
+
+vi api.py
+from flask import Flask, json
+
+companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+
+api = Flask(__name__)
+
+@api.route('/companies', methods=['GET'])
+def get_companies():
+  return json.dumps(companies)
+
+if __name__ == '__main__':
+    api.run()
+
+
+############################################
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+curl http://127.0.0.1:5000/companies  
+[{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+
+
+#############################################################
+Python post api 
+cat api.py
+from flask import Flask, json
+
+companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+
+api = Flask(__name__)
+
+@api.route('/companies', methods=['GET'])
+def get_companies():
+  return json.dumps(companies)
+
+@api.route('/companies', methods=['POST'])
+def post_companies():
+  return json.dumps({"success": True}), 201
+
+if __name__ == '__main__':
+    api.run()
+
+
+#########################################################################################
+
+
+falcon, Like Flask, Falcon can be installed using pip. At the same time, you can install gunicorn, an HTTP server:
+$pip install falcon gunicorn
+
+#Unlike Flask, Falcon does not have a built-in server. Now open up a new text file and copy-paste these contents:
+
+import falcon, json
+
+class CompaniesResource(object):
+  companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+  def on_get(self, req, resp):
+    resp.body = json.dumps(self.companies)
+
+  def on_post(self, req, resp):
+    resp.status = falcon.HTTP_201
+    resp.body = json.dumps({"success": True})
+
+api = falcon.API()
+companies_endpoint = CompaniesResource()
+api.add_route('/companies', companies_endpoint)
+
+
+
