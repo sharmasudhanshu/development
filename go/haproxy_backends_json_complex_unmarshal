@@ -38,10 +38,15 @@ func main() {
     	if(err!=nil) {
         	log.Fatal(err)
     	}
-	fmt.Printf("%d \n",res.Version)
-	fmt.Printf("%v\n",res)
-	//fmt.Printf("\tThreat Type: %s\n",res.Datas[0].Address)
-	//fmt.Printf("\tPlatform Type: %s\n",res.Matches[0].PlatformType)
-	//fmt.Printf("\tThreat Entry Type: %s\n",res.Matches[0].ThreatEntryType)
-	//fmt.Printf("\tURL: %s\n",res.Matches[0].Threat.URL)
+	//fmt.Printf("%d \n",res.Version)
+	//fmt.Printf("%v\n",res)
+	
+	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Address)
+	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Check)
+	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Maxconn)
+	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Name)
+	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Port)
+	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Weight)
+	
+	
 }
