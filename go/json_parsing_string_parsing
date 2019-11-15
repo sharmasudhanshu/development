@@ -1,0 +1,30 @@
+// You can edit this code!
+// Click here and start typing.
+package main
+
+import "fmt"
+import "encoding/json"
+import "strings"
+
+func main() {
+// keep variables name in structure starting with capital letters
+type haversion struct {
+  Code  int `json:"code"`
+  Mess string  `json:"message"`
+}
+
+birdJson := `{"code":409,"message":"15: Version in configuration file is 10, given version is 0"}`
+var hav haversion	
+json.Unmarshal([]byte(birdJson), &hav)
+
+fmt.Printf("Code: %d, id: %s   \n", hav.Code, hav.Mess)
+fmt.Printf("contents of decoded json is: %#v\r\n", hav)
+//var tests string
+tests := hav.Mess
+fmt.Printf("tests: %s",tests)
+res2 := strings.Split(tests, ",") 
+fmt.Println("\n Result 2: ", res2[0]) 
+verstr := res2[0]
+res3 := strings.Split(verstr, " ") 
+fmt.Println("\n Result 2: ", res3[6]) 
+}
