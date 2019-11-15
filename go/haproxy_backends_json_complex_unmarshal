@@ -1,0 +1,47 @@
+package main
+import (
+	"fmt"
+	"log"
+	"encoding/json"
+)
+
+// response from sbserver POST request
+type Results struct {
+    Version int  `json:"_version"`
+    Datas []Data `json:"data"`
+}
+
+// nested within sbserver response
+type Data struct {
+    Address string 
+    Check string 
+    Maxconn int 
+    Name string
+    Port int
+    Weight int
+}
+
+func main() {
+	fmt.Println("Hello, playground")
+	
+	// sample POST request
+	//   curl -X POST -H 'Content-Type: application/json' 
+	// -d '{"threatInfo": {"threatEntries": [{"url": "http://testsafebrowsing.appspot.com/apiv4/ANY_PLATFORM/MALWARE/URL/"}]}}' 
+	// http://127.0.0.1:8080/v4/threatMatches:find
+	
+	// sample JSON response
+	jsonResponse := `{"_version":10,"data":[{"address":"10.1.234.102","check":"enabled","maxconn":30,"name":"matomo_service_be1_v1.edc.lxd","port":80,"weight":100},{"address":"10.1.234.134","check":"enabled","maxconn":30,"name":"matomo_service_be2_v1.edc.lxd","port":80,"weight":100},{"address":"10.1.234.181","check":"enabled","maxconn":30,"name":"matomo_service_be4_v1.edc.lxd","port":80,"weight":100}]}`
+
+	
+	res := &Results{}
+	err := json.Unmarshal([]byte(jsonResponse), res)
+    	if(err!=nil) {
+        	log.Fatal(err)
+    	}
+	fmt.Printf("%d \n",res.Version)
+	fmt.Printf("%v\n",res)
+	//fmt.Printf("\tThreat Type: %s\n",res.Datas[0].Address)
+	//fmt.Printf("\tPlatform Type: %s\n",res.Matches[0].PlatformType)
+	//fmt.Printf("\tThreat Entry Type: %s\n",res.Matches[0].ThreatEntryType)
+	//fmt.Printf("\tURL: %s\n",res.Matches[0].Threat.URL)
+}
