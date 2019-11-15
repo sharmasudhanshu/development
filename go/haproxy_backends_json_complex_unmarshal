@@ -40,13 +40,27 @@ func main() {
     	}
 	//fmt.Printf("%d \n",res.Version)
 	//fmt.Printf("%v\n",res)
-	
-	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Address)
-	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Check)
-	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Maxconn)
-	fmt.Printf("\t first backend server address : %s\n",res.Datas[0].Name)
-	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Port)
-	fmt.Printf("\t first backend server address : %d\n",res.Datas[0].Weight)
-	
-	
+	fmt.Printf("\t printing  first backend server record \n")
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[0].Address)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[0].Check)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[0].Maxconn)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[0].Name)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[0].Port)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[0].Weight)
+	fmt.Printf("\t printing  second backend server record \n")
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[1].Address)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[1].Check)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[1].Maxconn)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[1].Name)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[1].Port)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[1].Weight)
+	fmt.Printf("\t printing  Third backend server record \n")
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[2].Address)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[2].Check)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[2].Maxconn)
+	fmt.Printf("\t  haproxy server address : %s\n",res.Datas[2].Name)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[2].Port)
+	fmt.Printf("\t  haproxy server address : %d\n",res.Datas[2].Weight)
+			
+			
 }
