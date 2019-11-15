@@ -1,0 +1,123 @@
+package main
+import "fmt"
+
+func main() {
+
+        var n map[string]int
+	fmt.Println(n)
+	if n == nil {
+		fmt.Println("n is nil")
+	}
+
+	// Attempting to add keys to a nil map will result in a runtime error
+	// n["one hundred"] = 100
+	
+	
+	var m = make(map[string]int)
+
+	fmt.Println(m)
+
+	if m == nil {
+		fmt.Println("m is nil")
+	} else {
+		fmt.Println("m is not nil")
+	}
+
+	// make() function returns an initialized and ready to use map.
+	// Since it is initialized, you can add new keys to it.
+	m["one hundred"] = 100
+	fmt.Println(m)
+
+
+var t = map[string]int{
+		"one":   1,
+		"two":   2,
+		"three": 3,
+		"four":  4,
+		"five":  5, // Comma is necessary
+	}
+
+	fmt.Println(t)
+	
+	
+	
+	// Initializing a map
+	var tinderMatch = make(map[string]string)
+
+	// Adding keys to a map
+	tinderMatch["Rajeev"] = "Angelina" // Assigns the value "Angelina" to the key "Rajeev"
+	tinderMatch["James"] = "Sophia"
+	tinderMatch["David"] = "Emma"
+
+	fmt.Println(tinderMatch)
+
+	/*
+	  Adding a key that already exists will simply override
+	  the existing key with the new value
+	*/
+	tinderMatch["Rajeev"] = "Jennifer"
+	fmt.Println(tinderMatch)
+	
+	//checking if a key exists in a map
+	var employees = map[int]string{
+	1001: "Rajeev",
+	1002: "Sachin",
+	1003: "James",
+        }
+	// var name string
+	// var ok bool
+	//name, ok := employees[1001]  // "Rajeev", true
+	
+	if name, ok := employees[1001]; ok {
+		fmt.Println("we have found employee Rajeev in employees map ",name)
+         }
+	
+	// iteration over a map
+	var personAge = map[string]int{
+		"Rajeev": 25,
+		"James":  32,
+		"Sarah":  29,
+	}
+
+	for name, age := range personAge {
+		fmt.Println(name, age)
+	}
+	//Maps are reference types , any changes done to map ,using any variable will be visible to all
+	
+	var m1 = map[string]int{
+		"one":   1,
+		"two":   2,
+		"three": 3,
+		"four":  4,
+		"five":  5,
+	}
+
+	var m2 = m1
+	fmt.Println("m1 = ", m1)
+	fmt.Println("m2 = ", m2)
+
+	m2["ten"] = 10
+	fmt.Println("\nm1 = ", m1)
+	fmt.Println("m2 = ", m2)
+        
+	
+	//delete an entry from map
+	
+	var fileExtensions = map[string]string{
+		"Python": ".py",
+		"C++":    ".cpp",
+		"Java":   ".java",
+		"Golang": ".go",
+		"Kotlin": ".kt",
+	}
+
+	fmt.Println(fileExtensions)
+
+	delete(fileExtensions, "Kotlin")
+
+	// delete function doesn't do anything if the key doesn't exist
+	delete(fileExtensions, "Javascript")
+
+	fmt.Println(fileExtensions)
+	
+}
