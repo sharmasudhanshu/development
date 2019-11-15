@@ -26,5 +26,5 @@ res2 := strings.Split(tests, ",")
 fmt.Println("\n Result 2: ", res2[0]) 
 verstr := res2[0]
 res3 := strings.Split(verstr, " ") 
-fmt.Println("\n Result 2: ", res3[6]) 
+fmt.Println("\n  final verion number: ", res3[6]) 
 }
