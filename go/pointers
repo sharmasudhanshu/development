@@ -55,6 +55,115 @@ func main() {
 	
 }
 
+###############################################################################################################
+
+
+package main
+
+import "fmt"
+
+// taking a function 
+func updateslice(funarr []int) { 
+  
+    // updating the value 
+    // at specified index 
+    funarr[4] = 750 
+} 
+
+// taking a function 
+func updatearray(funarr *[5]int) { 
+  
+    // updating the array value 
+    // at specified index 
+    (*funarr)[4] = 750 
+      
+    // you can also write  
+    // the above line of code 
+    // funarr[4] = 750 
+} 
+
+type Employee struct { 
+  
+    // taking variables 
+    name  string 
+    empid int
+} 
+
+
+ 
+
+type Vertex struct {
+	X int
+	Y int
+	Z int
+}
+
+func main() {
+	v := Vertex{1, 2 , 3}
+	p := &v
+	p.X = 1e9
+	p.Y = 6
+	fmt.Println(v)
+
+   emp := Employee{"ABC", 19078} 
+  
+    // Here, it is the pointer to the struct 
+    pts := &emp 
+  
+    fmt.Println(pts) 
+  
+    // accessing the struct fields(liem employee's name) 
+    // using a pointer but here we are not using 
+    // dereferencing explicitly 
+    fmt.Println(pts.name) 
+  
+    // same as above by explicitly using 
+    // dereferencing concept 
+    // means the result will be the same 
+    fmt.Println((*pts).name) 
+
+
+  
+
+  
+    // creating the instance of the 
+    // Employee struct type 
+    empl := Employee{"ABC", 19078} 
+  
+    // Here, it is the pointer to the struct 
+    mypts := &empl 
+  
+    // displaying the values 
+    fmt.Println(mypts) 
+  
+    // updating the value of name 
+    pts.name = "XYZ"
+  
+    fmt.Println(pts) 
+
+    // Taking an pointer to an array , check  func updatearray
+    arr := [5]int{78, 89, 45, 56, 14} 
+  
+    // passing pointer to an array 
+    // to function updatearray 
+    updatearray(&arr) 
+  
+    // array after updating 
+    fmt.Println(arr) 
+
+ // Taking an slice 
+    s := [5]int{78, 89, 45, 56, 14} 
+  
+    // passing slice to the 
+    // function updateslice 
+    updateslice(s[:]) 
+  
+    // displaying the result 
+    fmt.Println(s) 
+
+
+
+}
 
 
 
