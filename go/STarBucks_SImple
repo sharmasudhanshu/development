@@ -49,8 +49,7 @@ func (c Customer) order(drink string) {
   c.orders <- drink 
   c.collectDrink()
 }
-func NewCustomer(name string, orders chan string,
-  drinks chan string) Customer {
+func NewCustomer(name string, orders chan string,  drinks chan string) Customer {
   c := Customer{name, orders, drinks}
   return c
 }
