@@ -51,4 +51,22 @@ ok      _/root/gotests  0.003s
 
 
 ###############################################################
+now run the test using   "github.com/stretchr/testify/assert" package  , not from simple  code as shown above in main_test.go
+but first install development tools for gcc  compiler availabilty ,
+
+apt-get install build-essential -y
+
+package main
+
+import (
+    "testing"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestCalculate(t *testing.T) {
+  assert.Equal(t, Calculate(2), 4)
+}
+
+
+
 
