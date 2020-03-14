@@ -4,7 +4,9 @@ go get github.com/stretchr/testify/assert
 go test ./... -v
 
 mkdir gotests
-cd gotests   #### create 2 files   ,  
+cd gotests   #### create 2 files in dir /root/gotests   ,  
+pwd
+/root/gotests
 
 cat main_test.go
 package main
