@@ -1,0 +1,52 @@
+
+go get github.com/stretchr/testify/assert
+
+go test ./... -v
+
+mkdir gotests
+cd gotests   #### create 2 files   ,  
+
+cat main_test.go
+package main
+
+import (
+    "testing"
+)
+
+func TestCalculate(t *testing.T) {
+    if Calculate(2) != 4 {
+        t.Error("Expected 2 + 2 to equal 4")
+    }
+}
+
+cat main.go
+
+package main
+
+import (
+    "fmt"
+)
+
+// Calculate returns x + 2.
+func Calculate(x int) (result int) {
+    result = x + 2
+    return result
+}
+
+func main() {
+    fmt.Println("Hello World")
+}
+
+#########################################################
+run test code
+pwd
+/root/gotests
+root@ubuntu18os:~/gotests# go test ./... -v
+=== RUN   TestCalculate
+--- PASS: TestCalculate (0.00s)
+PASS
+ok      _/root/gotests  0.003s
+
+
+###############################################################
+
