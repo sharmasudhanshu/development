@@ -293,3 +293,45 @@ PASS
 ok      _/root/gotests  0.005s
 
 ###############################################################################################
+assert.JSONEqf  for json example ,
+
+package main
+import (
+  "testing"
+  "github.com/stretchr/testify/assert"
+)
+
+func TestSomething(t *testing.T) {
+
+  var a string = "Hello"
+  var b string = "Hello"
+
+  assert.Equal(t, a, b, "The two words should be the same.")
+  assert.JSONEq(t, `{"hello": "world", "foo": "bar"}`, `{"foo": "bar", "hello": "world"}`)
+  assert.JSONEqf(t, `{"hello": "world", "foo": "bar"}`, `{"foo": "bar", "hello": "worldg"}`, "error message %s", "formatted")
+}
+
+
+=== RUN   TestSomething
+--- FAIL: TestSomething (0.00s)
+    main_test.go:17:
+                Error Trace:    main_test.go:17
+                Error:          Not equal:
+                                expected: map[string]interface {}{"foo":"bar", "hello":"world"}
+                                actual  : map[string]interface {}{"foo":"bar", "hello":"worldg"}
+
+                                Diff:
+                                --- Expected
+                                +++ Actual
+                                @@ -2,3 +2,3 @@
+                                  (string) (len=3) "foo": (string) (len=3) "bar",
+                                - (string) (len=5) "hello": (string) (len=5) "world"
+                                + (string) (len=5) "hello": (string) (len=6) "worldg"
+                                 }
+                Test:           TestSomething
+                Messages:       error message formatted
+FAIL
+FAIL    _/root/gotests  0.006s
+FAIL
+
+#############################################################################################################
