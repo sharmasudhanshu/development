@@ -115,6 +115,83 @@ FAIL    _/root/gotests  0.006s
 FAIL
 
 ##############################################################################################################
+string comparision tests  Hello & Helloc,
+cat main.go
+package main
+import (
+    "fmt"
+)
+// Calculate returns x + 2.
+func Calculate(x int) (result int) {
+    result = x + 2
+    return result
+}
+func main() {
+    fmt.Println("Hello World")
+}
+
+
+cat  main_test.go   
+package main
+import (
+  "testing"
+  "github.com/stretchr/testify/assert"
+)
+func TestSomething(t *testing.T) {
+  var a string = "Hello"
+  var b string = "Helloc"
+
+  assert.Equal(t, a, b, "The two words should be the same.")
+
+}
+
+
+failed scenario
+root@ubuntu18os:~/gotests# go test ./... -v
+=== RUN   TestSomething
+--- FAIL: TestSomething (0.00s)
+    main_test.go:15:
+                Error Trace:    main_test.go:15
+                Error:          Not equal:
+                                expected: "Hello"
+                                actual  : "Helloc"
+
+                                Diff:
+                                --- Expected
+                                +++ Actual
+                                @@ -1 +1 @@
+                                -Hello
+                                +Helloc
+                Test:           TestSomething
+                Messages:       The two words should be the same.
+FAIL
+FAIL    _/root/gotests  0.005s
+FAIL
+
+
+###################################################################################################
+ go test ./... -v
+=== RUN   TestSomething
+--- PASS: TestSomething (0.00s)
+PASS
+ok      _/root/gotests  0.005s
+root@ubuntu18os:~/gotests# cat main_test.go
+package main
 
 
 
+import (
+  "testing"
+  "github.com/stretchr/testify/assert"
+)
+
+func TestSomething(t *testing.T) {
+
+  var a string = "Hello"
+  var b string = "Hello"
+
+  assert.Equal(t, a, b, "The two words should be the same.")
+
+}
+
+#########################################################################################
