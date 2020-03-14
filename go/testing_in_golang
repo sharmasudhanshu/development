@@ -67,6 +67,54 @@ func TestCalculate(t *testing.T) {
   assert.Equal(t, Calculate(2), 4)
 }
 
+########################################################################################################################
+cat  main_test.go  ###run for success scenario , 2 + 2 = 4
+package main
+
+import (
+    "testing"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestCalculate(t *testing.T) {
+  assert.Equal(t, Calculate(2), 4)
+}
+
+
+root@ubuntu18os:~/gotests# go test ./... -v
+=== RUN   TestCalculate
+--- PASS: TestCalculate (0.00s)
+PASS
+ok      _/root/gotests  0.005s
+root@ubuntu18os:~/gotests# vi main_test.go
+root@ubuntu18os:~/gotests# vi main_test.go
+cat  main_test.go  ###run for failure scenario , 2 + 2 = 5
+package main
+
+import (
+    "testing"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestCalculate(t *testing.T) {
+  assert.Equal(t, Calculate(2), 5)
+}
+
+
+root@ubuntu18os:~/gotests# go test ./... -v
+=== RUN   TestCalculate
+--- FAIL: TestCalculate (0.00s)
+    main_test.go:9:
+                Error Trace:    main_test.go:9
+                Error:          Not equal:
+                                expected: 4
+                                actual  : 5
+                Test:           TestCalculate
+FAIL
+FAIL    _/root/gotests  0.006s
+FAIL
+
+##############################################################################################################
 
 
 
